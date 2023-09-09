@@ -19,7 +19,7 @@ const CountsBarChart = ({listOfValues}) => {
 export default CountsBarChart;
 
 const CONTAINER_STYLE = {
-  maxWidth: "500px",
+  minWidth: "500px",
   height: "300px"
 }
 
