@@ -1,50 +1,55 @@
-import {useEffect, useState} from "react";
-import {Button} from "react-bootstrap";
-import {randomInteger} from "../../utils/randomNumber";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {useReducer} from "react";
 import CountsBarChart from "../organism/CountsBarChart";
+import {INITIAL_STATE, rollReducer} from "../../utils/diceReducer";
+import Controller from "../molecule/Controller";
+import {Badge} from "react-bootstrap";
+import Footer from "../atom/Footer";
 
 
 const MainPage = () => {
 
-  const [rolls, setRolls] = useState([]);
-
-  useEffect(() => {
-    handleAutomaticRoll()
-  }, [])
-
-  const handleSingleRoll = () => {
-    const newRolls = [...rolls, randomInteger()]
-    setRolls(newRolls)
-  }
-
-  const handleClear = () => {
-    setRolls([])
-  }
-
-  const handleAutomaticRoll = () => {
-    const newRolls = [...rolls]
-
-    for (let i = 0; i < 50; i++) {
-      newRolls.push(randomInteger())
-    }
-
-    setRolls(newRolls)
-  }
-
-
+  const [state, dispatch] = useReducer(rollReducer, INITIAL_STATE);
 
   return (
     <div>
-      <h1 className="text-center m-3">Main Page</h1>
+      <h1 className="text-center m-3 display-3">
+        Law of large numbers
+      </h1>
 
-      {rolls ? <CountsBarChart listOfValues={rolls} /> : null}
+      <p className="lead m-3">
+        Here's a little application to experiment with the Law of large numbers using randomly rolling dice.
+      </p>
 
-      <Button onClick={handleAutomaticRoll} variant="warning">Automatic Roll <FontAwesomeIcon icon="fa-solid fa-dice" /></Button>
-      <Button onClick={handleSingleRoll} variant="success">Single Roll <FontAwesomeIcon icon="fa-solid fa-dice" /></Button>
-      <Button onClick={handleClear} variant="danger">Clear <FontAwesomeIcon icon="fa-solid fa-trash-can" /></Button>
+      <p className="lead m-3">
+        The law itself is commonly known for it's significance in probability theory, where it guarantees that
+        when repeating the experiment for large number of times, the result probabilities will match
+        the expected (calculated) relative frequency.
+      </p>
+
+      <p className="lead m-3">
+        This application is focusing on randomized simulation of rolling the dice while calculating the frequency
+        for each of the rolls. You can use either the <Badge bg="primary">Mass roll</Badge> option for multiple trials
+        or the <Badge bg="success">Single Roll</Badge> button for a single dice roll.
+      </p>
+
+      <div style={STYLE}>
+        {state.rolls ? <CountsBarChart listOfValues={state.rolls}/> : null}
+        <Controller state={state} dispatch={dispatch}/>
+      </div>
+
+
+      <Footer />
     </div>
   );
 };
 
 export default MainPage;
+
+const STYLE = {
+  display: "flex",
+  flexDirection: "row",
+  flexWrap: "wrap",
+  gap: "30px",
+  alignItems: "center",
+  justifyContent: "center"
+}

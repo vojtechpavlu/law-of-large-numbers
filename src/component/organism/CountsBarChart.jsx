@@ -1,6 +1,5 @@
 import {Bar} from "react-chartjs-2";
 import {Chart as ChartJS} from "chart.js/auto"
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {mapToDiceIcon} from "../../utils/iconMapper";
 
 
@@ -11,7 +10,7 @@ const CountsBarChart = ({listOfValues}) => {
   ChartJS.defaults.font.family = "'FontAwesome', 'Font Awesome 6 Free', 'Helvetica', 'Helvetica Neue'"
 
   return (
-    <div className="m-2">
+    <div className="m-2" style={CONTAINER_STYLE}>
       <Bar data={counts} options={options}/>
     </div>
   );
@@ -19,12 +18,18 @@ const CountsBarChart = ({listOfValues}) => {
 
 export default CountsBarChart;
 
+const CONTAINER_STYLE = {
+  maxWidth: "500px",
+  height: "300px"
+}
+
 const options = {
+  maintainAspectRatio : false,
   scales: {
     x: {
       ticks: {
         font: {
-          size: 40
+          size: 35
         }
       }
     }
@@ -54,7 +59,7 @@ const aggregate = (listOfValues) => {
     labels,
     datasets: [{
       label: "Number of Dice Rolls",
-      data,
+      data
     }]
   };
 }
