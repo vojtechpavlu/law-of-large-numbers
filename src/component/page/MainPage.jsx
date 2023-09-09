@@ -1,15 +1,19 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Button} from "react-bootstrap";
 import {randomInteger} from "../../utils/randomNumber";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import BarChart from "../organism/BarChart";
+import CountsBarChart from "../organism/CountsBarChart";
 
 
 const MainPage = () => {
 
-  const [rolls, setRolls] = useState([1, 5, 6]);
+  const [rolls, setRolls] = useState([]);
 
-  const handleRoll = () => {
+  useEffect(() => {
+    handleAutomaticRoll()
+  }, [])
+
+  const handleSingleRoll = () => {
     const newRolls = [...rolls, randomInteger()]
     setRolls(newRolls)
   }
@@ -18,27 +22,27 @@ const MainPage = () => {
     setRolls([])
   }
 
-  const dice = {
-    "1": <FontAwesomeIcon icon="fa-solid fa-dice-one" />,
-    "2": <FontAwesomeIcon icon="fa-solid fa-dice-two" />,
-    "3": <FontAwesomeIcon icon="fa-solid fa-dice-three" />,
-    "4": <FontAwesomeIcon icon="fa-solid fa-dice-four" />,
-    "5": <FontAwesomeIcon icon="fa-solid fa-dice-five" />,
-    "6": <FontAwesomeIcon icon="fa-solid fa-dice-six" />
+  const handleAutomaticRoll = () => {
+    const newRolls = [...rolls]
+
+    for (let i = 0; i < 50; i++) {
+      newRolls.push(randomInteger())
+    }
+
+    setRolls(newRolls)
   }
+
+
 
   return (
     <div>
       <h1 className="text-center m-3">Main Page</h1>
 
-      {rolls ? <BarChart listOfValues={rolls} /> : null}
+      {rolls ? <CountsBarChart listOfValues={rolls} /> : null}
 
-      <Button onClick={handleRoll} variant="success">Roll <FontAwesomeIcon icon="fa-solid fa-dice" /></Button>
+      <Button onClick={handleAutomaticRoll} variant="warning">Automatic Roll <FontAwesomeIcon icon="fa-solid fa-dice" /></Button>
+      <Button onClick={handleSingleRoll} variant="success">Single Roll <FontAwesomeIcon icon="fa-solid fa-dice" /></Button>
       <Button onClick={handleClear} variant="danger">Clear <FontAwesomeIcon icon="fa-solid fa-trash-can" /></Button>
-
-      <pre>{JSON.stringify(rolls)}</pre>
-
-      {Object.keys(dice).map((k) => <p key={k}>{k} {dice[k]}</p>)}
     </div>
   );
 };
