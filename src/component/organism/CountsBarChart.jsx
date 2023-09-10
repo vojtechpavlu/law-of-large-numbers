@@ -13,7 +13,7 @@ const CountsBarChart = ({ listOfValues }) => {
   ].join(', ');
 
   return (
-    <div className="m-2" style={CONTAINER_STYLE}>
+    <div className="m-3" style={CONTAINER_STYLE}>
       <Bar data={counts} options={options} />
     </div>
   );
