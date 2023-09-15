@@ -1,9 +1,8 @@
 # Law of Large Numbers
 
-Simple web application used as an educational support tool for the Law of Large Numbers via simulating a large number of Dice Rolls and the *on-the-fly* result visualisation.
+Simple web application used as an educational support tool for the Law of Large Numbers via simulating a large number of Dice Rolls and the _on-the-fly_ result visualisation.
 
-This project is used as a visualisation tool for lectures of topic on Probability for Artificial Intelligence Course at [Smíchovská střední průmyslová škola a gymnázium](https://www.ssps.cz/). 
-
+This project is used as a visualisation tool for lectures of topic on Probability for Artificial Intelligence Course at [Smíchovská střední průmyslová škola a gymnázium](https://www.ssps.cz/).
 
 ### Deployment
 

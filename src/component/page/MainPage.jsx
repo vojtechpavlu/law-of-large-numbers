@@ -4,7 +4,7 @@ import { INITIAL_STATE, rollReducer } from '../../utils/diceReducer';
 import Controller from '../molecule/Controller';
 import { Badge } from 'react-bootstrap';
 import Footer from '../atom/Footer';
-import Statistics from "../organism/Statistics";
+import Statistics from '../organism/Statistics';
 
 const MainPage = () => {
   const [state, dispatch] = useReducer(rollReducer, INITIAL_STATE);
@@ -22,8 +22,10 @@ const MainPage = () => {
         <em>
           the more of trials performed, the probabilities tend to stabilize with
           their expected value more.
-        </em> In other words, the random unexpected effects tend to have lower influence on
-        the results when the experiment is performed multiple times.
+        </em>{' '}
+        In other words, the random unexpected effects tend to have lower
+        influence on the results when the experiment is performed multiple
+        times.
       </p>
 
       <p className="lead m-4">
